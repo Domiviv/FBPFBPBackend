@@ -25,16 +25,22 @@ public class UserController {
         return userSI.getUserById(id);
     }
 
-    @GetMapping("/teachers")
+    @GetMapping("/administrators")
     private Set<User> getAdministrators() { return userSI.getAdministrators(); }
 
-    @GetMapping("/students")
+    @GetMapping("/customers")
     private Set<User> getCustomers() { return userSI.getCustomers(); }
 
     @PostMapping("/add")
     private User add(@RequestBody User user) {
         return userSI.save(user);
     }
+
+    @PostMapping("/customer/add")
+    private User addCustomer(@RequestBody User user) {
+        return userSI.saveCustomer(user);
+    }
+
     @DeleteMapping("/delete/{id}")
     private String deleteUserById(@PathVariable Integer id){
         return userSI.deleteUserById(id);

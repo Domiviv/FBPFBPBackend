@@ -9,7 +9,8 @@ public class PasswordTest {
     @Test
     void test() {
         //pass : admin et test
-        Password p = new Password("test");
+        String pwd = "test";
+        Password p = new Password(pwd);
         p.firstHash();
         System.out.print(p.getHash());
         fail("Not yet implemented");

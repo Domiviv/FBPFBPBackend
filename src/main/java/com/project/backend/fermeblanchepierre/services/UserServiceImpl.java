@@ -1,4 +1,5 @@
 package com.project.backend.fermeblanchepierre.services;
+import com.project.backend.fermeblanchepierre.entities.Role;
 import com.project.backend.fermeblanchepierre.entities.User;
 import com.project.backend.fermeblanchepierre.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,17 @@ public class UserServiceImpl implements UserService {
 
     public User save(User user){
         try {
-            user.setPwd(user.getPwd());
+            return uR.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Email provided already exists");
+        }
+    }
+
+    public User saveCustomer(User user){
+        try {
+            Role r = new Role();
+            r.setIdRole(2);
+            user.setRole(r);
             return uR.save(user);
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("Email provided already exists");

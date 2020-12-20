@@ -1,12 +1,10 @@
 package com.project.backend.fermeblanchepierre.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.project.backend.fermeblanchepierre.services.Password;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Users")
@@ -15,6 +13,7 @@ import javax.persistence.*;
         property = "idUser",
         scope = User.class
 )
+@JsonIgnoreProperties({"order"})
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -45,6 +44,9 @@ public class User {
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idRole")
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Set<Order> orders;
 
     public Integer getIdUser() {
         return idUser;
@@ -118,6 +120,15 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @JsonProperty("order")
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
 

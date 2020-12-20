@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    private User updateUserById(@PathVariable Integer id, @RequestBody User newUser){
+    private Boolean updateUserById(@PathVariable Integer id, @RequestBody User newUser){
         return userSI.updateUserById(id, newUser);
     }
 

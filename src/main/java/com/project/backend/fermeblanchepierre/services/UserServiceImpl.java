@@ -77,17 +77,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public User updateUserById(Integer id, User newUser) {
+    public Boolean updateUserById(Integer id, User newUser) {
         User oldUser = uR.findById(id).orElse(null);
-        oldUser.setRole(newUser.getRole());
-        oldUser.setPwd(newUser.getPwd());
-        try{
+        if (oldUser != null) {
+            oldUser.setRole(newUser.getRole());
+            oldUser.setPwd(newUser.getPwd());
             oldUser.setEmail(newUser.getEmail());
-        }catch (DataIntegrityViolationException e){
-            throw new DataIntegrityViolationException("Email provided already exists");
+            oldUser.setFirstName(newUser.getFirstName());
+            oldUser.setLastName(newUser.getLastName());
+            uR.save(oldUser);
+            return true;
         }
-        oldUser.setFirstName(newUser.getFirstName());
-        oldUser.setLastName(newUser.getLastName());
-        return uR.save(oldUser);
+        return false;
     }
 }

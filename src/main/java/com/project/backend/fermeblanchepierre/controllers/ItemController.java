@@ -1,9 +1,7 @@
 package com.project.backend.fermeblanchepierre.controllers;
 
 import com.project.backend.fermeblanchepierre.entities.Item;
-import com.project.backend.fermeblanchepierre.entities.User;
 import com.project.backend.fermeblanchepierre.services.ItemServiceImpl;
-import com.project.backend.fermeblanchepierre.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,7 @@ public class ItemController {
     private String deleteAllItems(){ return itemSI.deleteAllItems(); }
 
     @PutMapping("/update/{id}")
-    private Item updateItemById(@PathVariable Integer id, @RequestBody Item newItem){
+    private Boolean updateItemById(@PathVariable Integer id, @RequestBody Item newItem){
         return itemSI.updateItemById(id, newItem);
     }
 

@@ -36,7 +36,7 @@ public class Item {
     @JoinColumn(name = "idMeasure")
     private Measure measure;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "ItemContains",
             joinColumns = @JoinColumn(name = "idItem"),
             inverseJoinColumns = @JoinColumn(name = "idAllergen"))

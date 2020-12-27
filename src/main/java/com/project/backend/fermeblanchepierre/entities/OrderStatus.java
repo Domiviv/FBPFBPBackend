@@ -11,11 +11,6 @@ import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "OrderStatus")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idStatus",
-        scope = OrderStatus.class
-)
 @JsonIgnoreProperties({"order"})
 public class OrderStatus {
     @Id

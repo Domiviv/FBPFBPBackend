@@ -23,6 +23,7 @@ public class Allergen {
     public Integer getIdAllergen() {
         return idAllergen;
     }
+
     public void setIdAllergen(Integer idAllergen) {
         this.idAllergen = idAllergen;
     }

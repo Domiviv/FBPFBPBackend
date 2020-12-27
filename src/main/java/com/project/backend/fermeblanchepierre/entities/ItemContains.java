@@ -1,11 +1,7 @@
 package com.project.backend.fermeblanchepierre.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.io.Serializable;
-
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "ItemContains")

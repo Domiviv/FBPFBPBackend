@@ -59,6 +59,10 @@ public class UserServiceImpl implements UserService {
         return uR.findById(id).orElse(null);
     }
 
+    public User getUserByEmail(String email){
+        return uR.findByEmail(email).orElse(null);
+    }
+
     public String deleteUserById(Integer id){
         try {
             uR.deleteById(id);

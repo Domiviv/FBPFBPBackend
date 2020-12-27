@@ -6,17 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class MeasureServiceImpl implements MeasureService {
+
     @Autowired
     private MeasureRepository mR;
 
-    public Set<Measure> getMeasures() {
-        return new HashSet<>((Collection<Measure>) mR.findAll());
+    public List<Measure> getAllMeasures() {
+        return (List<Measure>) mR.findAll();
     }
 
     public Measure getMeasureById(Integer id){
@@ -41,15 +40,17 @@ public class MeasureServiceImpl implements MeasureService {
         }
     }
 
-    public Measure save(Measure measure) { return mR.save(measure); }
+    public Measure addMeasure(Measure measure) { return mR.save(measure); }
 
     public Measure updateMeasureById(Integer id, Measure newMeasure) {
         Measure oldMeasure = mR.findById(id).orElse(null);
-        oldMeasure.setLabel(newMeasure.getLabel());
+        if (oldMeasure != null) {
+            oldMeasure.setLabel(newMeasure.getLabel());
+        }
         oldMeasure.setUnit(newMeasure.getUnit());
         return mR.save(oldMeasure);
     }
 
-    public Iterable<Measure> saveAll(Set<Measure> measureList) { return mR.saveAll(measureList); }
+    public List<Measure> addMeasureList(List<Measure> measureList) { return (List<Measure>) mR.saveAll(measureList); }
 
 }

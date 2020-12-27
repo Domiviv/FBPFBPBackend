@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.List;
 
 @Repository
 public interface ItemContainsRepository extends CrudRepository<ItemContains, Integer> {
@@ -17,5 +17,5 @@ public interface ItemContainsRepository extends CrudRepository<ItemContains, Int
     void deleteByItemId(@Param("id") Integer id);
 
     @Query(value = "select * from ItemContains where idItem = :id", nativeQuery = true)
-    Set<ItemContains> getAllByItemId(@Param("id") Integer id);
+    List<ItemContains> getAllByItemId(@Param("id") Integer id);
 }

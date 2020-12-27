@@ -2,21 +2,19 @@ package com.project.backend.fermeblanchepierre.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Items")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idItem",
-        scope = Item.class
-)
+@JsonIgnoreProperties({"stocks","soldItems"})
 public class Item {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idItem", nullable = false)
     private Integer idItem;
 
@@ -41,6 +39,20 @@ public class Item {
             joinColumns = @JoinColumn(name = "idItem"),
             inverseJoinColumns = @JoinColumn(name = "idAllergen"))
     private List<Allergen> allergens;
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<Stock> stocks;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    public List<SoldItem> soldItems;
+
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<Stock> stocks) {
+        this.stocks = stocks;
+    }
 
     public Integer getIdItem() {
         return idItem;
@@ -90,11 +102,25 @@ public class Item {
         this.qt = qt;
     }
 
+    public List<SoldItem> getSoldItems() {
+        return soldItems;
+    }
+
+    public void setSoldItems(List<SoldItem> soldItems) {
+        this.soldItems = soldItems;
+    }
+
     public Measure getMeasure() {
         return measure;
     }
 
     public void setMeasure(Measure measure) {
         this.measure = measure;
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return this.label + " " + this.qt + this.measure.getUnit() + "   € " + df.format(this.price);
     }
 }

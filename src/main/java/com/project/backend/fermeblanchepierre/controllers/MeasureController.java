@@ -5,6 +5,7 @@ import com.project.backend.fermeblanchepierre.services.MeasureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -13,32 +14,36 @@ import java.util.Set;
 public class MeasureController {
 
     @Autowired
-    private MeasureServiceImpl measureSI;
+    private MeasureServiceImpl mSI;
 
+    // GET MAPPINGS
     @GetMapping("/all")
-    private Set<Measure> getMeasures(){ return measureSI.getMeasures(); }
+    private List<Measure> getAllMeasures(){ return mSI.getAllMeasures(); }
 
     @GetMapping("/{id}")
-    private Measure getMeasureById(@PathVariable Integer id) { return  measureSI.getMeasureById(id); }
+    private Measure getMeasureById(@PathVariable Integer id) { return  mSI.getMeasureById(id); }
 
+
+    // POST MAPPINGS
     @PostMapping("/add")
-    private Measure add(@RequestBody Measure measure) { return measureSI.save(measure); }
-
-    @DeleteMapping("/delete/{id}")
-    private String deleteUserById(@PathVariable Integer id) { return measureSI.deleteMeasureById(id); }
-
-
-    @DeleteMapping("/delete/all")
-    private String deleteAllMeasures(){ return measureSI.deleteAllMeasures(); }
-
-    @PutMapping("/update/{id}")
-    private Measure updateMeasureById(@PathVariable Integer id, @RequestBody Measure newMeasure){
-        return measureSI.updateMeasureById(id, newMeasure);
-    }
+    private Measure addMeasure(@RequestBody Measure measure) { return mSI.addMeasure(measure); }
 
     @PostMapping("/addList")
-    private Iterable<Measure> addList(@RequestBody Set<Measure> measureList){
-        return measureSI.saveAll(measureList);
+    private List<Measure> addMeasureList(@RequestBody List<Measure> measureList){
+        return mSI.addMeasureList(measureList);
     }
 
+    // DELETE MAPPINGS
+    @DeleteMapping("/delete/{id}")
+    private String deleteMeasureById(@PathVariable Integer id) { return mSI.deleteMeasureById(id); }
+    
+    @DeleteMapping("/delete/all")
+    private String deleteAllMeasures(){ return mSI.deleteAllMeasures(); }
+
+
+    // PUT MAPPINGS
+    @PutMapping("/update/{id}")
+    private Measure updateMeasureById(@PathVariable Integer id, @RequestBody Measure measure){
+        return mSI.updateMeasureById(id, measure);
+    }
 }

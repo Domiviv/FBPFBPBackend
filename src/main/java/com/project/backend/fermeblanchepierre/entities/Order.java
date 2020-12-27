@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Orders")
@@ -21,14 +22,10 @@ public class Order {
     private Integer idOrder;
 
     @Column(name = "orderDt")
-    private Date orderDt;
+    private LocalDateTime orderDt;
 
     @Column(name = "pickupDt")
-    private Date pickupDt;
-
-    @Column(name = "billNumber")
-    private String billNumber;
-
+    private LocalDateTime pickupDt;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idUser")
@@ -38,6 +35,17 @@ public class Order {
     @JoinColumn(name = "idStatus")
     private OrderStatus status;
 
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<SoldItem> soldItems;
+
+    public List<SoldItem> getSoldItems() {
+        return soldItems;
+    }
+
+    public void setSoldItems(List<SoldItem> soldItems) {
+        this.soldItems = soldItems;
+    }
+
     public Integer getIdOrder() {
         return idOrder;
     }
@@ -46,28 +54,20 @@ public class Order {
         this.idOrder = idOrder;
     }
 
-    public Date getOrderDt() {
+    public LocalDateTime getOrderDt() {
         return orderDt;
     }
 
-    public void setOrderDt(Date orderDt) {
+    public void setOrderDt(LocalDateTime orderDt) {
         this.orderDt = orderDt;
     }
 
-    public Date getPickupDt() {
+    public LocalDateTime getPickupDt() {
         return pickupDt;
     }
 
-    public void setPickupDt(Date pickupDt) {
+    public void setPickupDt(LocalDateTime pickupDt) {
         this.pickupDt = pickupDt;
-    }
-
-    public String getBillNumber() {
-        return billNumber;
-    }
-
-    public void setBillNumber(String billNumber) {
-        this.billNumber = billNumber;
     }
 
     public User getUser() {

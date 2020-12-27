@@ -6,41 +6,58 @@ import com.project.backend.fermeblanchepierre.services.AllergenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path="/allergen")
+@RequestMapping(path = "/allergen")
 public class AllergenController {
 
-
     @Autowired
-    private AllergenServiceImpl allergenSI;
+    private AllergenServiceImpl aSI;
 
+    // GET MAPPINGS
     @GetMapping("/all")
-    private Set<Allergen> getAllergens(){ return allergenSI.getAllergens(); }
-
-    @GetMapping("/{id}")
-    private Allergen getAllergenById(@PathVariable Integer id) { return  allergenSI.getAllergenById(id); }
-
-    @PostMapping("/add")
-    private Allergen add(@RequestBody Allergen allergen) { return allergenSI.save(allergen); }
-
-    @DeleteMapping("/delete/{id}")
-    private String deleteUserById(@PathVariable Integer id) { return allergenSI.deleteAllergenById(id); }
-
-
-    @DeleteMapping("/delete/all")
-    private String deleteAllAllergens(){ return allergenSI.deleteAllAllergens(); }
-
-    @PutMapping("/update/{id}")
-    private Allergen updateAllergenById(@PathVariable Integer id, @RequestBody Allergen newAllergen){
-        return allergenSI.updateAllergenById(id, newAllergen);
+    private List<Allergen> getAllAllergens() {
+        return aSI.getAllAllergens();
     }
 
-    @PostMapping("/addList")
-    private Iterable<Allergen> addList(@RequestBody Set<Allergen> allergenList){
-        return allergenSI.saveAll(allergenList);
+    @GetMapping("/{id}")
+    private Allergen getAllergenById(@PathVariable Integer id) {
+        return aSI.getAllergenById(id);
+    }
+
+
+    // POST MAPPINGS
+
+    @PostMapping("/add")
+    private Allergen addAllergen(@RequestBody Allergen allergen) {
+        return aSI.addAllergen(allergen);
+    }
+
+    @PostMapping("/add-list")
+    private List<Allergen> addAllergenList(@RequestBody List<Allergen> allergenList) {
+        return aSI.addAllergenList(allergenList);
+    }
+
+    // DELETE MAPPINGS
+
+    @DeleteMapping("/delete/{id}")
+    private String deleteAllergenById(@PathVariable Integer id) {
+        return aSI.deleteAllergenById(id);
+    }
+
+    @DeleteMapping("/delete/all")
+    private String deleteAllAllergens() {
+        return aSI.deleteAllAllergens();
+    }
+
+
+    //PUT MAPPINGS
+
+    @PutMapping("/update/{id}")
+    private Allergen updateAllergenById(@PathVariable Integer id, @RequestBody Allergen newAllergen) {
+        return aSI.updateAllergenById(id, newAllergen);
     }
 
 

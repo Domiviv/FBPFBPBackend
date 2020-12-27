@@ -25,6 +25,12 @@ public class UserController {
         return userSI.getUserById(id);
     }
 
+    @GetMapping("/connected")
+    private User getUserByEmail(@RequestParam String email){
+        return userSI.getUserByEmail(email);
+    }
+
+
     @GetMapping("/administrators")
     private Set<User> getAdministrators() { return userSI.getAdministrators(); }
 

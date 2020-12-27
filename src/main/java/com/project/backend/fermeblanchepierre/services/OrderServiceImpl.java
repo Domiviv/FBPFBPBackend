@@ -5,9 +5,11 @@ import com.project.backend.fermeblanchepierre.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -24,6 +26,9 @@ public class OrderServiceImpl implements OrderService {
 
     public Order getOrderById(Integer id){ return oR.findById(id).orElse(null); }
 
+    public List<Order> getOrdersByUserEmail(String email){ return oR.getOrdersByUserEmail(email); }
+
+    @Transactional
     public String cancelOrder(Integer id){
         try {
             oR.cancelOrder(id);
@@ -39,7 +44,6 @@ public class OrderServiceImpl implements OrderService {
             order.setIdOrder(id);
             order.setOrderDt(newOrder.getOrderDt());
             order.setPickupDt(newOrder.getPickupDt());
-            order.setBillNumber(newOrder.getBillNumber());
             order.setStatus(newOrder.getStatus());
             order.setUser(newOrder.getUser());
             oR.save(order);

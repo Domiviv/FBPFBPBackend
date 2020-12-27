@@ -8,11 +8,6 @@ import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Users")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idUser",
-        scope = User.class
-)
 @JsonIgnoreProperties({"order"})
 public class User {
     @Id
@@ -38,8 +33,8 @@ public class User {
     @Column(name = "address2")
     private String address2;
 
-    @Column(name = "newsletter")
-    private boolean newsletter;
+    @Column(name = "verified")
+    private boolean verified;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idRole")
@@ -106,12 +101,12 @@ public class User {
         this.address2 = address2;
     }
 
-    public boolean isNewsletter() {
-        return newsletter;
+    public boolean isVerified() {
+        return verified;
     }
 
-    public void setNewsletter(boolean newsletter) {
-        this.newsletter = newsletter;
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     public Role getRole() {

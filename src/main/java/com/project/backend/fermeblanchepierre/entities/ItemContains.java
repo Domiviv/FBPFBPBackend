@@ -16,6 +16,8 @@ public class ItemContains implements Serializable {
     @JoinColumn(name = "idItem", nullable = false)
     private Integer idItem;
 
+    // GETTERS & SETTERS
+
     public Integer getIdAllergen() {
         return idAllergen;
     }

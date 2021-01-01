@@ -9,17 +9,23 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class SoldItemServiceImpl implements SoldItemService{
+public class SoldItemServiceImpl implements SoldItemService {
 
     @Autowired
     private SoldItemRepository sICR;
 
 
-    @Transactional
-    public void addSoldItem(Integer idItem, Integer idOrder){
-        System.out.println("SERVICEIMPL OK");
-        sICR.addSoldItem(idItem, idOrder);
+    // GET
+
+    public List<SoldItem> getAllSoldItems() {
+        return (List<SoldItem>) sICR.findAll();
     }
 
-    public List<SoldItem> getAllSoldItems() { return (List<SoldItem>) sICR.findAll(); }
+
+    // POST
+
+    @Transactional
+    public void addSoldItem(Integer idItem, Integer idOrder) {
+        sICR.addSoldItem(idItem, idOrder);
+    }
 }

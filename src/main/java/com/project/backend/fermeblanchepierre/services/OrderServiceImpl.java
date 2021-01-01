@@ -7,10 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -18,22 +15,36 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository oR;
 
-    public Set<Order> getOrders() {
-        return new HashSet<>((Collection<Order>) oR.findAll());
+    // GET
+
+    public List<Order> getAllOrders() {
+        return (List<Order>) oR.findAll();
     }
 
-    public Order save(Order order){ return oR.save(order); }
+    public Order getOrderById(Integer id) {
+        return oR.findById(id).orElse(null);
+    }
 
-    public Order getOrderById(Integer id){ return oR.findById(id).orElse(null); }
+    public List<Order> getOrdersByUserEmail(String email) {
+        return oR.getOrdersByUserEmail(email);
+    }
 
-    public List<Order> getOrdersByUserEmail(String email){ return oR.getOrdersByUserEmail(email); }
+
+    // POST
+
+    public Order addOrder(Order order) {
+        return oR.save(order);
+    }
+
+
+    // PUT
 
     @Transactional
-    public String cancelOrder(Integer id){
+    public String cancelOrderById(Integer id) {
         try {
             oR.cancelOrder(id);
             return "Order canceled";
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             return "The order you want to delete does not exist";
         }
     }

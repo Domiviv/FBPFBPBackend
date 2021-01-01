@@ -21,7 +21,10 @@ public class EmailServiceImpl implements EmailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void confirmOrder(String email, Order order, List<Stock> stocks){
+
+    // SENDING EMAIL TO CONFIRM ORDER
+
+    public void confirmOrder(String email, Order order, List<Stock> stocks) {
 
         DecimalFormat df = new DecimalFormat("#.##");
         DateTimeFormatter dtfFull = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -32,7 +35,7 @@ public class EmailServiceImpl implements EmailService {
         String itemList = "";
         Double total = 0.0;
 
-        for(Stock stock : stocks){
+        for (Stock stock : stocks) {
             total = total + stock.getItem().getPrice();
             itemList = itemList + "- " + stock.getItem().toString() + "\n";
         }
@@ -44,16 +47,17 @@ public class EmailServiceImpl implements EmailService {
         mail.setSubject("Confirmation de votre commande portant le numéro " + order.getIdOrder());
         mail.setText(
                 "Chère cliente, cher client,\n\n" +
-                "Nous vous remercions pour votre commande (portant le numéro " + order.getIdOrder() + ") effectuée le " + now + ", nous vous adressons ci-joint une facture d'un montant de " + df.format(total)+ " euros.\n\n" +
-                "Voici le récapitulatif de votre commande :\n" + itemList +
-                "\n\nVoici les informations de paiement :\n" +
-                "Montant total à payer : € " + df.format(total) + "\n" +
-                "Avant le : " + deadline + "\n" +
-                "Sur le compte : BEXX XXXX XXXX XXXX\n" +
-                "BIC : XXXXXXXX\n" +
-                "Communication (la communication doit contenir votre n° de commande) : " + order.getIdOrder() + "\n\n" +
-                "Cordialement,\n" +
-                "Ferme de Blanche Pierre."
+                        "Nous vous remercions pour votre commande (portant le numéro " + order.getIdOrder() + ") effectuée le " + now + ", nous vous adressons ci-joint une facture d'un montant de " + df.format(total) + " euros.\n\n" +
+                        "Voici le récapitulatif de votre commande :\n" + itemList +
+                        "\n\nVoici les informations de paiement :\n" +
+                        "Montant total à payer : € " + df.format(total) + "\n" +
+                        "Avant le : " + deadline + "\n" +
+                        "Sur le compte : BEXX XXXX XXXX XXXX\n" +
+                        "BIC : XXXXXXXX\n" +
+                        "Communication (la communication doit contenir votre n° de commande) : " + order.getIdOrder() + "\n\n" +
+                        "Si vous désirez régler ce montant sur place, veuillez en nous en informer en répondant à ce mail.\n\n" +
+                        "Cordialement,\n" +
+                        "Ferme de Blanche Pierre."
         );
         javaMailSender.send(mail);
     }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -17,6 +16,7 @@ public class MeasureController {
     private MeasureServiceImpl mSI;
 
     // GET MAPPINGS
+
     @GetMapping("/all")
     private List<Measure> getAllMeasures(){ return mSI.getAllMeasures(); }
 
@@ -25,6 +25,7 @@ public class MeasureController {
 
 
     // POST MAPPINGS
+
     @PostMapping("/add")
     private Measure addMeasure(@RequestBody Measure measure) { return mSI.addMeasure(measure); }
 

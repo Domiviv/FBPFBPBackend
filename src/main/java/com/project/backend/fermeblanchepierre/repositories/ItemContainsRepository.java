@@ -16,6 +16,6 @@ public interface ItemContainsRepository extends CrudRepository<ItemContains, Int
     @Query(value = "DELETE FROM ItemContains WHERE idItem = :id", nativeQuery = true)
     void deleteByItemId(@Param("id") Integer id);
 
-    @Query(value = "select * from ItemContains where idItem = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM ItemContains WHERE idItem = :id", nativeQuery = true)
     List<ItemContains> getAllByItemId(@Param("id") Integer id);
 }

@@ -7,8 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-
-
 @Repository
 public interface StockRepository extends CrudRepository<Stock, Integer> {
 
@@ -21,8 +19,5 @@ public interface StockRepository extends CrudRepository<Stock, Integer> {
 
     @Modifying
     @Query(value = "DELETE FROM Stocks WHERE idItem = :idItem LIMIT 1", nativeQuery = true)
-    void deleteStockByItemId(@Param("idItem") Integer idItem)
-    ;
-
-
+    void deleteStockByItemId(@Param("idItem") Integer idItem);
 }

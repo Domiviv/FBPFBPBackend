@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 public class StockController {
 
     @Autowired
-    private StockServiceImpl stockSI;
+    private StockServiceImpl sSI;
 
     // GET MAPPINGS
 
     @GetMapping("/count/{id}")
-    private Integer getStockCountById(@PathVariable Integer id) { return stockSI.getStockCountById(id); }
+    private Integer getStockCountById(@PathVariable Integer id) { return sSI.getStockCountById(id); }
 
     @GetMapping("/item/{idItem}")
-    private Stock getFirstStockByItemId(@PathVariable Integer idItem) { return stockSI.getFirstStockByItemId(idItem); }
+    private Stock getFirstStockByItemId(@PathVariable Integer idItem) { return sSI.getFirstStockByItemId(idItem); }
 
 }

@@ -15,6 +15,8 @@ public class ItemContainsServiceImpl {
     @Autowired
     private ItemContainsRepository iCR;
 
+    // GET
+
     public List<ItemContains> getAllItemContains() {
         return (List<ItemContains>) iCR.findAll();
     }
@@ -22,6 +24,15 @@ public class ItemContainsServiceImpl {
     public List<ItemContains> getItemContainsById(Integer id) {
         return iCR.getAllByItemId(id);
     }
+
+
+    // POST
+
+    public ItemContains addItemContains(ItemContains itemContains) {
+        return iCR.save(itemContains);
+    }
+
+    // DELETE
 
     public String deleteItemContains(ItemContains itemContains) {
         try {
@@ -42,9 +53,8 @@ public class ItemContainsServiceImpl {
         }
     }
 
-    public ItemContains addItemContains(ItemContains itemContains) {
-        return iCR.save(itemContains);
-    }
+
+    // PUT
 
     public Boolean updateItemContainsById(Integer id, ItemContains newItemContains) {
         ItemContains oldItemContains = iCR.findById(id).orElse(null);

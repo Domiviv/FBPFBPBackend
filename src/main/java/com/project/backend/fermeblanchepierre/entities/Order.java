@@ -17,7 +17,7 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "idOrder", nullable = false)
     private Integer idOrder;
 
@@ -37,6 +37,9 @@ public class Order {
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<SoldItem> soldItems;
+
+
+    // GETTERS & SETTERS
 
     public List<SoldItem> getSoldItems() {
         return soldItems;

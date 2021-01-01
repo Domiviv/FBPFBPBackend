@@ -1,20 +1,18 @@
 package com.project.backend.fermeblanchepierre.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "OrderStatus")
 @JsonIgnoreProperties({"order"})
 public class OrderStatus {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idStatus", nullable = false)
     private Integer idStatus;
 
@@ -22,7 +20,10 @@ public class OrderStatus {
     private String label;
 
     @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public Set<Order> orders;
+    public List<Order> orders;
+
+
+    // GETTERS & SETTERS
 
     public Integer getIdStatus() {
         return idStatus;
@@ -41,11 +42,11 @@ public class OrderStatus {
     }
 
     @JsonProperty("order")
-    public Set<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 }

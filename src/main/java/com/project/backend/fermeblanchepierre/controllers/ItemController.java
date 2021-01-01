@@ -3,7 +3,6 @@ package com.project.backend.fermeblanchepierre.controllers;
 import com.project.backend.fermeblanchepierre.entities.Allergen;
 import com.project.backend.fermeblanchepierre.entities.Item;
 import com.project.backend.fermeblanchepierre.entities.ItemContains;
-import com.project.backend.fermeblanchepierre.entities.Stock;
 import com.project.backend.fermeblanchepierre.services.ItemContainsServiceImpl;
 import com.project.backend.fermeblanchepierre.services.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

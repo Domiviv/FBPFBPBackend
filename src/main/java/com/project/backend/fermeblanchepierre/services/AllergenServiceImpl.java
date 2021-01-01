@@ -10,8 +10,11 @@ import java.util.List;
 
 @Service
 public class AllergenServiceImpl implements AllergenService {
+    
     @Autowired
     private AllergenRepository aR;
+
+    // GET
 
     public List<Allergen> getAllAllergens() {
         return (List<Allergen>) aR.findAll();
@@ -20,6 +23,20 @@ public class AllergenServiceImpl implements AllergenService {
     public Allergen getAllergenById(Integer id) {
         return aR.findById(id).orElse(null);
     }
+
+
+    // POST
+
+    public Allergen addAllergen(Allergen allergen) {
+        return aR.save(allergen);
+    }
+
+    public List<Allergen> addAllergenList(List<Allergen> allergenList) {
+        return (List<Allergen>) aR.saveAll(allergenList);
+    }
+
+
+    // DELETE
 
     public String deleteAllergenById(Integer id) {
         try {
@@ -39,9 +56,8 @@ public class AllergenServiceImpl implements AllergenService {
         }
     }
 
-    public Allergen addAllergen(Allergen allergen) {
-        return aR.save(allergen);
-    }
+
+    // PUT
 
     public Allergen updateAllergenById(Integer id, Allergen newAllergen) {
         Allergen oldAllergen = aR.findById(id).orElse(null);
@@ -50,9 +66,4 @@ public class AllergenServiceImpl implements AllergenService {
         }
         return aR.save(oldAllergen);
     }
-
-    public List<Allergen> addAllergenList(List<Allergen> allergenList) {
-        return (List<Allergen>) aR.saveAll(allergenList);
-    }
-
 }

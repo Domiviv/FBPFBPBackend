@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.*;
 import com.project.backend.fermeblanchepierre.services.Password;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Users")
 @JsonIgnoreProperties({"order"})
 public class User {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUser", nullable = false)
     private Integer idUser;
 
@@ -34,14 +35,17 @@ public class User {
     private String address2;
 
     @Column(name = "verified")
-    private boolean verified;
+    private boolean verified = true;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idRole")
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public Set<Order> orders;
+    public List<Order> orders;
+
+
+    // GETTERS & SETTERS
 
     public Integer getIdUser() {
         return idUser;
@@ -118,14 +122,12 @@ public class User {
     }
 
     @JsonProperty("order")
-    public Set<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-
-
 }
 

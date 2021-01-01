@@ -17,11 +17,15 @@ public class SoldItemController {
     private SoldItemServiceImpl sISI;
 
     // GET MAPPINGS
+
     @GetMapping("/all")
-    private List<SoldItem> getAllSoldItems() { return sISI.getAllSoldItems(); }
+    private List<SoldItem> getAllSoldItems() {
+        return sISI.getAllSoldItems();
+    }
 
 
     // POST MAPPINGS
+
     @PostMapping("/add")
     private void addSoldItem(@RequestParam Integer idItem, @RequestParam Integer idOrder) {
         System.out.println("CONTROLLER OK");

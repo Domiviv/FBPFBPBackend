@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -14,12 +14,11 @@ import java.util.Set;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-        @Query(value = "select * from users where idRole = 1", nativeQuery = true)
-        Set<User> getAdministrators();
+        @Query(value = "SELECT * FROM users WHERE idRole = 1", nativeQuery = true)
+        List<User> getAllAdministrators();
 
-        @Query(value = "select * from users where idRole = 2", nativeQuery = true)
-        Set<User> getCustomers();
+        @Query(value = "SELECT * FROM users WHERE idRole = 2", nativeQuery = true)
+        List<User> getAllCustomers();
 
         Optional<User> findByEmail(String email);
-
 }

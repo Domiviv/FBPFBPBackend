@@ -1,10 +1,5 @@
 package com.project.backend.fermeblanchepierre.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -19,6 +14,8 @@ public class Stock {
     @JoinColumn(name = "idItem")
     private Item item;
 
+
+    // GETTERS & SETTERS
 
     public Integer getIdStock() {
         return idStock;

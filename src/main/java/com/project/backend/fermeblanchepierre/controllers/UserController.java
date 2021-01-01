@@ -5,65 +5,82 @@ import com.project.backend.fermeblanchepierre.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path="/user") // This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/user") // This means URL's start with /demo (after Application path)
 public class UserController {
+
     @Autowired
-    private UserServiceImpl userSI;
+    private UserServiceImpl uSI;
+
+
+    // GET MAPPINGS
 
     @GetMapping("/all")
-    private Set<User> getUsers(){
-        return userSI.getUsers();
+    private List<User> getUsers() {
+        return uSI.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    private User getUserById(@PathVariable Integer id){
-        return userSI.getUserById(id);
+    private User getUserById(@PathVariable Integer id) {
+        return uSI.getUserById(id);
     }
 
     @GetMapping("/connected")
-    private User getUserByEmail(@RequestParam String email){
-        return userSI.getUserByEmail(email);
+    private User getUserByEmail(@RequestParam String email) {
+        return uSI.getUserByEmail(email);
     }
 
 
     @GetMapping("/administrators")
-    private Set<User> getAdministrators() { return userSI.getAdministrators(); }
+    private List<User> getAdministrators() {
+        return uSI.getAllAdministrators();
+    }
 
     @GetMapping("/customers")
-    private Set<User> getCustomers() { return userSI.getCustomers(); }
+    private List<User> getCustomers() {
+        return uSI.getAllCustomers();
+    }
+
+
+    // POST MAPPINGS
 
     @PostMapping("/add")
-    private User add(@RequestBody User user) {
-        return userSI.save(user);
+    private Boolean addUser(@RequestBody User user) {
+        return uSI.addUser(user);
     }
 
     @PostMapping("/customer/add")
-    private User addCustomer(@RequestBody User user) {
-        return userSI.saveCustomer(user);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    private String deleteUserById(@PathVariable Integer id){
-        return userSI.deleteUserById(id);
-    }
-
-    @DeleteMapping("/delete/all")
-    private String deleteAllUsers(){
-        return userSI.deleteAllUsers();
-    }
-
-    @PutMapping("/update/{id}")
-    private Boolean updateUserById(@PathVariable Integer id, @RequestBody User newUser){
-        return userSI.updateUserById(id, newUser);
+    private Boolean addCustomer(@RequestBody User user) {
+        return uSI.addCustomer(user);
     }
 
     @PostMapping("/addList")
-    private Iterable<User> addList(@RequestBody Set<User> userList){
-        return userSI.saveAll(userList);
+    private List<User> addList(@RequestBody List<User> userList) {
+        return uSI.addUserList(userList);
+    }
+
+
+    // DELETE MAPPINGS
+
+    @DeleteMapping("/delete/{id}")
+    private String deleteUserById(@PathVariable Integer id) {
+        return uSI.deleteUserById(id);
+    }
+
+    @DeleteMapping("/delete/all")
+    private String deleteAllUsers() {
+        return uSI.deleteAllUsers();
+    }
+
+
+    // PUT MAPPINGS
+
+    @PutMapping("/update/{id}")
+    private Boolean updateUserById(@PathVariable Integer id, @RequestBody User newUser) {
+        return uSI.updateUserById(id, newUser);
     }
 }

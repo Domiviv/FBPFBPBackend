@@ -10,8 +10,12 @@ import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Autowired
     private ItemRepository iR;
+
+
+    // GET
 
     public List<Item> getAllItems() {
         return (List<Item>) iR.findAll();
@@ -21,6 +25,19 @@ public class ItemServiceImpl implements ItemService {
         return iR.findById(id).orElse(null);
     }
 
+
+    // POST
+
+    public Item addItem(Item item) {
+        return iR.save(item);
+    }
+
+    public List<Item> addItemList(List<Item> itemList) {
+        return (List<Item>) iR.saveAll(itemList);
+    }
+
+
+    // DELETE
     public String deleteItemById(Integer id) {
         try {
             Item item = getItemById(id);
@@ -43,9 +60,8 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
-    public Item addItem(Item item) {
-        return iR.save(item);
-    }
+
+    // PUT
 
     public Boolean updateItemById(Integer id, Item newItem) {
         Item oldItem = iR.findById(id).orElse(null);
@@ -61,9 +77,4 @@ public class ItemServiceImpl implements ItemService {
         }
         return false;
     }
-
-    public List<Item> addItemList(List<Item> itemList) {
-        return (List<Item>) iR.saveAll(itemList);
-    }
-
 }

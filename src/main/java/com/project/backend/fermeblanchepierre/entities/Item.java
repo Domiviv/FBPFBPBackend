@@ -1,9 +1,6 @@
 package com.project.backend.fermeblanchepierre.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.text.DecimalFormat;
@@ -11,8 +8,9 @@ import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Items")
-@JsonIgnoreProperties({"stocks","soldItems"})
+@JsonIgnoreProperties({"stocks", "soldItems"})
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idItem", nullable = false)
@@ -45,6 +43,9 @@ public class Item {
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     public List<SoldItem> soldItems;
+
+
+    // GETTERS & SETTERS
 
     public List<Stock> getStocks() {
         return stocks;

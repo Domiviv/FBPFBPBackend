@@ -11,5 +11,10 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     @Autowired
     OrderStatusRepository oSR;
 
-    public OrderStatus getOrderStatusById(Integer id) { return oSR.findById(id).orElse(null); }
+
+    // GET
+
+    public OrderStatus getOrderStatusById(Integer id) {
+        return oSR.findById(id).orElse(null);
+    }
 }

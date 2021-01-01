@@ -9,6 +9,7 @@ import java.util.List;
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Allergens")
 public class Allergen {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idAllergen", nullable = false)
@@ -19,6 +20,8 @@ public class Allergen {
 
     @ManyToMany(mappedBy = "allergens", fetch = FetchType.LAZY)
     private List<Item> items;
+
+    // GETTERS & SETTERS
 
     public Integer getIdAllergen() {
         return idAllergen;

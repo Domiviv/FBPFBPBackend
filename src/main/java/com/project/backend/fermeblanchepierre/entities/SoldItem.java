@@ -1,9 +1,6 @@
 package com.project.backend.fermeblanchepierre.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
@@ -12,7 +9,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"order"})
 public class SoldItem {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSoldItem", nullable = false)
     private Integer idSoldItem;
 
@@ -23,6 +20,9 @@ public class SoldItem {
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idOrder")
     private Order order;
+
+
+    // GETTERS & SETTERS
 
     public Integer getIdSoldItem() {
         return idSoldItem;

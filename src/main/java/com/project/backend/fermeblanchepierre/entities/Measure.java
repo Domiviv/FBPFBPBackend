@@ -3,13 +3,14 @@ package com.project.backend.fermeblanchepierre.entities;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Measures")
 public class Measure {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idMeasure", nullable = false)
     private Integer idMeasure;
 
@@ -20,7 +21,10 @@ public class Measure {
     private String unit;
 
     @OneToMany(mappedBy = "measure", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public Set<Item> items;
+    public List<Item> items;
+
+
+    // GETTERS & SETTERS
 
     public Integer getIdMeasure() {
         return idMeasure;
@@ -47,11 +51,11 @@ public class Measure {
     }
 
     @JsonIgnore
-    public Set<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Set<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 }

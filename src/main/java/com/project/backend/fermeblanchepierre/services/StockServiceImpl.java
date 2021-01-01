@@ -15,9 +15,19 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private StockRepository sR;
 
-    public Integer getStockCountById(Integer id) { return sR.getStockCountById(id); }
 
-    public Stock getFirstStockByItemId(Integer idItem) { return sR.getFirstStockByItemId(idItem); }
+    // GET
+
+    public Integer getStockCountById(Integer id) {
+        return sR.getStockCountById(id);
+    }
+
+    public Stock getFirstStockByItemId(Integer idItem) {
+        return sR.getFirstStockByItemId(idItem);
+    }
+
+
+    // DELETE
 
     @Transactional
     public String deleteStockByItemId(Integer idItem) {
@@ -28,7 +38,6 @@ public class StockServiceImpl implements StockService {
             return "There's no item like this in stock";
         }
     }
-
 
 
 }

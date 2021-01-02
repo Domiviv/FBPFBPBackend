@@ -94,8 +94,18 @@ public class OrderController {
     // PUT MAPPINGS
 
     @PutMapping("/cancel/{id}")
-    private String cancelOrderById(@PathVariable Integer id) {
-        return oSI.cancelOrderById(id);
+    private String cancelOrder(@PathVariable Integer id) {
+        return oSI.cancelOrder(id);
+    }
+
+    @PutMapping("/confirm-payment/{id}")
+    private String confirmPayment(@PathVariable Integer id) {
+        return oSI.confirmPayment(id);
+    }
+
+    @PutMapping("/confirm-receipt/{id}")
+    private String confirmReceipt(@PathVariable Integer id) {
+        return oSI.confirmReceipt(id);
     }
 
     @PutMapping("/update/{id}")

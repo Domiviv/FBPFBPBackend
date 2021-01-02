@@ -25,7 +25,7 @@ public class ItemController {
     // GET MAPPINGS
 
     @GetMapping("/all")
-    private List<Item> getItems() {
+    private List<Item> getAllItems() {
         return iSI.getAllItems();
     }
 

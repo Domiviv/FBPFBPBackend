@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     // PUT
 
     @Transactional
-    public String cancelOrderById(Integer id) {
+    public String cancelOrder(Integer id) {
         try {
             oR.cancelOrder(id);
             return "Order canceled";
@@ -48,6 +48,27 @@ public class OrderServiceImpl implements OrderService {
             return "The order you want to delete does not exist";
         }
     }
+
+    @Transactional
+    public String confirmPayment(Integer id) {
+        try {
+            oR.confirmPayment(id);
+            return "Payment confirmed";
+        } catch (EmptyResultDataAccessException e) {
+            return "The order you want to confirm does not exist";
+        }
+    }
+
+    @Transactional
+    public String confirmReceipt(Integer id) {
+        try {
+            oR.confirmReceipt(id);
+            return "Receipt confirmed";
+        } catch (EmptyResultDataAccessException e) {
+            return "The order you want to confirm does not exist";
+        }
+    }
+
 
     public Boolean updateOrderById(Integer id, Order newOrder) {
         Order order = oR.findById(id).orElse(null);

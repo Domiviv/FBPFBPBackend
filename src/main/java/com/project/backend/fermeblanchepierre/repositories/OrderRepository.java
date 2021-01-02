@@ -16,6 +16,14 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
     @Query(value = "UPDATE orders SET idStatus = 6 WHERE idOrder = :id", nativeQuery = true)
     void cancelOrder(@Param("id") Integer id);
 
+    @Modifying
+    @Query(value = "UPDATE orders SET idStatus = 4 WHERE idOrder = :id", nativeQuery = true)
+    void confirmPayment(@Param("id") Integer id);
+
+    @Modifying
+    @Query(value = "UPDATE orders SET idStatus = 5 WHERE idOrder = :id", nativeQuery = true)
+    void confirmReceipt(@Param("id") Integer id);
+
     @Query(value = "SELECT o.* FROM users u JOIN orders o ON u.idUser = o.idUser WHERE u.email = :email", nativeQuery = true)
     List<Order> getOrdersByUserEmail(@Param("email") String email);
 

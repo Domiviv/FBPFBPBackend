@@ -61,6 +61,8 @@ public class OrderController {
     @PostMapping("/add")
     private Boolean addOrder(@RequestParam Integer idUser, @RequestBody List<Stock> stocks) {
 
+        System.out.println("HEY");
+
         // CHECK IF IN STOCK
         for (Stock stock : stocks) {
             if (sSI.getFirstStockByItemId(stock.getItem().getIdItem()) == null) {

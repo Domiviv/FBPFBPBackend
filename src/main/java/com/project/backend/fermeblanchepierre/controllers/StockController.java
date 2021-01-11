@@ -22,4 +22,10 @@ public class StockController {
     @GetMapping("/item/{idItem}")
     private Stock getFirstStockByItemId(@PathVariable Integer idItem) { return sSI.getFirstStockByItemId(idItem); }
 
+
+    // POST MAPPINGS
+    @PostMapping("/populate/{x}")
+    public void populate(@PathVariable Integer x) {
+        sSI.populate(x);
+    }
 }

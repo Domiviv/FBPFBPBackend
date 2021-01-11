@@ -20,4 +20,8 @@ public interface StockRepository extends CrudRepository<Stock, Integer> {
     @Modifying
     @Query(value = "DELETE FROM Stocks WHERE idItem = :idItem LIMIT 1", nativeQuery = true)
     void deleteStockByItemId(@Param("idItem") Integer idItem);
+
+    @Modifying
+    @Query(value = "INSERT INTO Stocks (idItem) VALUES (:idItem)", nativeQuery = true)
+    void populate(@Param("idItem") Integer idItem);
 }

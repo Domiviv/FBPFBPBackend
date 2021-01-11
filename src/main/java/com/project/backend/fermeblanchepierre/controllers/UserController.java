@@ -36,12 +36,12 @@ public class UserController {
 
 
     @GetMapping("/administrators")
-    private List<User> getAdministrators() {
+    private List<User> getAllAdministrators() {
         return uSI.getAllAdministrators();
     }
 
     @GetMapping("/customers")
-    private List<User> getCustomers() {
+    private List<User> getAllCustomers() {
         return uSI.getAllCustomers();
     }
 

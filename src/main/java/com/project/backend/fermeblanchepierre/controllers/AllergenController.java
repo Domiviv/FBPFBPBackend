@@ -18,6 +18,7 @@ public class AllergenController {
 
     // GET MAPPINGS
 
+    //
     @GetMapping("/all")
     private List<Allergen> getAllAllergens() {
         return aSI.getAllAllergens();

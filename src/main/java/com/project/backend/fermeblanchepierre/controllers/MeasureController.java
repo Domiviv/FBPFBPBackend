@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping(path="/measure")
 public class MeasureController {
 
+    // Déclaration du service
     @Autowired
     private MeasureServiceImpl mSI;
 

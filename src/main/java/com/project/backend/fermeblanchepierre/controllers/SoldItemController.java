@@ -13,11 +13,13 @@ import java.util.List;
 @RequestMapping(path = "/sold-item")
 public class SoldItemController {
 
+    // Déclaration du service
     @Autowired
     private SoldItemServiceImpl sISI;
 
     // GET MAPPINGS
 
+    // Récupère la liste des tous les produits vendus
     @GetMapping("/all")
     private List<SoldItem> getAllSoldItems() {
         return sISI.getAllSoldItems();
@@ -26,9 +28,9 @@ public class SoldItemController {
 
     // POST MAPPINGS
 
+    // Ajoute un produit vendu
     @PostMapping("/add")
     private void addSoldItem(@RequestParam Integer idItem, @RequestParam Integer idOrder) {
-        System.out.println("CONTROLLER OK");
         sISI.addSoldItem(idItem, idOrder);
     }
 

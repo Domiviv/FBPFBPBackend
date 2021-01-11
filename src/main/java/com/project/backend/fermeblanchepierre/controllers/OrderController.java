@@ -17,9 +17,10 @@ import java.util.List;
 @RequestMapping(path = "/order")
 public class OrderController {
 
-
+    // Logger pour la gestion d'erreur avec l'e-mail de confirmation
     private Logger logger = LoggerFactory.getLogger(OrderController.class);
 
+    // Déclaration des services appelés
     @Autowired
     private OrderServiceImpl oSI;
 
@@ -61,7 +62,6 @@ public class OrderController {
     @PostMapping("/add")
     private Boolean addOrder(@RequestParam Integer idUser, @RequestBody List<Stock> stocks) {
 
-        System.out.println("HEY");
 
         // CHECK IF IN STOCK
         for (Stock stock : stocks) {
@@ -95,21 +95,25 @@ public class OrderController {
 
     // PUT MAPPINGS
 
+    // Annule une commande sur base de son id
     @PutMapping("/cancel/{id}")
     private String cancelOrder(@PathVariable Integer id) {
         return oSI.cancelOrder(id);
     }
 
+    // Confirme le paiement d'une commande sur base de son id
     @PutMapping("/confirm-payment/{id}")
     private String confirmPayment(@PathVariable Integer id) {
         return oSI.confirmPayment(id);
     }
 
+    // Confirme l'enlèvement d'une commande sur base de son id
     @PutMapping("/confirm-receipt/{id}")
     private String confirmReceipt(@PathVariable Integer id) {
         return oSI.confirmReceipt(id);
     }
 
+    // modifie une commande sur base de son id
     @PutMapping("/update/{id}")
     private Boolean updateOrderById(@PathVariable Integer id, @RequestBody Order order) {
         return oSI.updateOrderById(id, order);

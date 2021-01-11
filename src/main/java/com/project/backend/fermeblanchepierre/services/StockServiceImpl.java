@@ -39,7 +39,7 @@ public class StockServiceImpl implements StockService {
     public void populate(Integer x) {
         List<Item> itemList = (List<Item>) iR.findAll();
         for (Item item: itemList){
-            if (item.getIdItem() != 19) {
+            if (item.getIdItem() != 19 && item.getIdItem() != 12) {
                 for (int i = 0; i < x; i++) {
                     sR.populate(item.getIdItem());
                 }

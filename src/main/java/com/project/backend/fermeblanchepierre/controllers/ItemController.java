@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping(path = "/item")
 public class ItemController {
 
+    // Déclaration des services appelés
     @Autowired
     private ItemServiceImpl iSI;
 
@@ -37,11 +38,13 @@ public class ItemController {
 
     // POST MAPPINGS
 
+    // Récupère la liste de tous les produits
     @PostMapping("/add-list")
     private List<Item> addItemList(@RequestBody List<Item> itemList) {
         return iSI.addItemList(itemList);
     }
 
+    // Récupère un produit sur base de son id
     @PostMapping("/add")
     private Boolean addItem(@RequestBody Item item) {
 
@@ -73,12 +76,13 @@ public class ItemController {
 
 
     // DELETE MAPPINGS
-
+    // Supprime produit sur base de son id
     @DeleteMapping("/delete/{id}")
     private String deleteItemById(@PathVariable Integer id) {
         return iSI.deleteItemById(id);
     }
 
+    // Vide la database des produits
     @DeleteMapping("/delete/all")
     private String deleteAllItems() {
         return iSI.deleteAllItems();
@@ -87,6 +91,7 @@ public class ItemController {
 
     // PUT MAPPINGS
 
+    // Modifie un produit sur base de son id
     @PutMapping("/update/{id}")
     private Boolean updateItemById(@PathVariable Integer id, @RequestBody Item newItem) {
         return iSI.updateItemById(id, newItem);

@@ -13,12 +13,14 @@ import java.util.List;
 @RequestMapping(path = "role")
 public class RoleController {
 
+    // Déclaration du service
     @Autowired
     private RoleServiceImpl rSI;
 
 
     // GET MAPPINGS
 
+    // Récupère la liste des roles
     @GetMapping(path = "/all")
     public List<Role> getAllRoles() {
         return rSI.getAllRoles();
